@@ -1,0 +1,50 @@
+{
+  "name": "nerd-pa",
+  "version": "0.0.1",
+  "description": "Personal assistant for Gnerkus",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "engines": {
+    "node": "6.0.0",
+    "npm": "3.8.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnerkus/nerd-pa.git"
+  },
+  "keywords": [
+    "daily",
+    "log",
+    "personal",
+    "assistant"
+  ],
+  "author": "Ifeanyi Oraelosi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gnerkus/nerd-pa/issues"
+  },
+  "homepage": "https://github.com/gnerkus/nerd-pa#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "dotenv": "2.0.0",
+    "express": "^4.13.4",
+    "pg": "^4.5.5",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.22.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "6.0.4",
+    "eslint": "^2.9.0",
+    "eslint-config-airbnb": "^8.0.0",
+    "eslint-plugin-import": "1.6.1",
+    "eslint-plugin-jsx-a11y": "1.0.4",
+    "eslint-plugin-react": "5.0.1",
+    "mocha": "^2.4.5",
+    "mock-require": "^1.2.1",
+    "node-mocks-http": "^1.5.2",
+    "should": "^8.3.1",
+    "sinon": "^1.17.3"
+  }
+}
