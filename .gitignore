@@ -12,3 +12,15 @@ notes
 
 # Ignore compiled files
 dist
+
+# Ignore documentation folder
+docs
+
+# Ignore test coverage data
+coverage
+
+# Ignore compiled gulpfile
+gulpfile.js
+
+# Ignore compiled test files
+test/dist
