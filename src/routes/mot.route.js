@@ -1,6 +1,7 @@
 // 2016-05-01 16:58:47
 // TODO: Fix repetitive 'bind' statements
-import motController from './../controllers/mot.controller';
+import MotController from 'controllers/mot.controller';
+const motController = new MotController();
 
 export default function (router) {
   router
