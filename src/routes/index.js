@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import motRoute from './mot.route';
-
+import motRoute from 'routes/mot.route';
 
 export default (app) => {
   const ROUTES = new Router();
