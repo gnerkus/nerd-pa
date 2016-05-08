@@ -1,4 +1,4 @@
-import MODELS from './../models';
+import MODELS from 'models';
 
 /**
  * 2016-05-01 16:52:46
@@ -8,23 +8,19 @@ import MODELS from './../models';
  */
 class BaseController {
   constructor(modelName, models = MODELS) {
-    this.MODELS = models;
     this.MODELNAME = modelName;
+    this.MODELS = models;
   }
 
   // Fetch all instances of the specified resource. This is mapped to the
   // 'GET /api/v1/resource' route
   index(request, response) {
-    let where = null;
+    const OPTIONS = {};
 
-    if (request.query.hidden) {
-      where = {
-        hidden: request.query.hidden,
-      };
-    }
+    // TODO: Define query options here
 
     this.MODELS[this.MODELNAME]
-      .findAll({ where })
+      .findAll(OPTIONS)
       .then((items) => response.status(200).json(items))
       .catch((error) => {
         // TODO: Handle error
@@ -101,13 +97,13 @@ class BaseController {
     this.MODELS[this.MODELNAME]
       .findById(ID)
       .then((item) => {
-        item
-          .destroy()
-          .then(() => response.status(200).json({ message: 'item deleted' }))
-          .catch((error) => {
-            // TODO: Handle error
-            response.status(500).json(error);
-          });
+        if (item) {
+          item
+            .destroy()
+            .then(() => response.status(200).json({ message: 'item deleted' }));
+        } else {
+          response.status(404).json({ message: 'not found' });
+        }
       })
       .catch((error) => {
         // TODO: Handle error

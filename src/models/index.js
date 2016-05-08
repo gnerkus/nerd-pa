@@ -1,4 +1,4 @@
-import config from './../config';
+import config from 'config';
 
 import fs from 'fs';
 import path from 'path';
@@ -12,11 +12,7 @@ fs.readdirSync(__dirname)
   .filter((file) => (file.indexOf('.') !== 0) && (file !== 'index.js'))
   .forEach((file) => {
     const MODEL = SEQUELIZE.import(path.join(__dirname, file));
-    if (Array.isArray(MODEL)) {
-      MODEL.forEach((table) => (DB[table.name] = table));
-    } else {
-      DB[MODEL.name] = MODEL;
-    }
+    DB[MODEL.name] = MODEL;
   });
 
 Object.keys(DB).forEach((modelName) => {

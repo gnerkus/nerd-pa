@@ -15,6 +15,12 @@ export default (SEQUELIZE, DataTypes) => {
       type: DataTypes.TEXT,
       field: 'content',
     },
+  }, {
+    classMethods: {
+      associate(models) {
+        // TODO: define model associations here
+      },
+    },
   });
 
   return MOT;
