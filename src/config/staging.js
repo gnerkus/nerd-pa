@@ -6,4 +6,5 @@ export default {
       dialect: 'postgres',
     },
   },
+  port: process.env.PORT,
 };
