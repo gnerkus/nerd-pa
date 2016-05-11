@@ -1,6 +1,5 @@
 import path from 'path';
 require('app-module-path').addPath(path.resolve('./dist'));
-require('dotenv').config();
 
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
