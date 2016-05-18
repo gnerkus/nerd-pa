@@ -11,9 +11,9 @@
     "compile": "./node_modules/.bin/babel --presets es2015 -d dist/ src/",
     "start": "npm run compile && DEBUG=mottr node dist/server.js",
     "codacy": "./node_modules/.bin/babel --presets es2015 gulpfile.src.js -o gulpfile.js && ./node_modules/.bin/gulp codacy",
-    "test": "npm run compile && NODE_ENV=test istanbul cover $npm_package_config_ISTANBUL_OPTS _mocha dist/test/index.js",
-    "test-unit": "npm run compile && NODE_ENV=test TEST_DIR=unit _mocha dist/test/index.js",
-    "test-integration": "npm run compile && NODE_ENV=test TEST_DIR=integration _mocha dist/test/index.js"
+    "test": "NODE_ENV=test babel-node ./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha -- dist/test/index.js",
+    "test-unit": "NODE_ENV=test TEST_DIR=unit mocha --compilers js:babel-core/register dist/test/index.js",
+    "test-integration": "NODE_ENV=test TEST_DIR=integration mocha --compilers js:babel-core/register dist/test/index.js"
   },
   "engines": {
     "node": "5.7.1"
@@ -58,7 +58,7 @@
     "eslint-plugin-react": "5.0.1",
     "gulp": "3.9.1",
     "gulp-codacy": "1.0.0",
-    "istanbul": "0.4.3",
+    "istanbul": "^1.0.0-alpha",
     "mocha": "^2.4.5",
     "mocha-lcov-reporter": "1.2.0",
     "mock-require": "^1.2.1",
