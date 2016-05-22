@@ -9,4 +9,5 @@ export default {
     },
   },
   port: 1337,
+  host: 'http://localhost:4200',
 };
