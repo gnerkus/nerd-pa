@@ -44,7 +44,7 @@ describe('Mots routes', () => {
         .expect(200)
         .end((err, res) => {
           if (err) done(err);
-          res.body.length.should.equal(MOCK_MOTS.length);
+          res.body.data.length.should.equal(MOCK_MOTS.length);
           done();
         });
     });
@@ -64,7 +64,7 @@ describe('Mots routes', () => {
         .expect(200)
         .end((err, res) => {
           if (err) done(err);
-          res.body.content.should.equal(MOCK_MOTS[0].content);
+          res.body.data.attributes.content.should.equal(MOCK_MOTS[0].content);
           done();
         });
     });
@@ -140,7 +140,7 @@ describe('Mots routes', () => {
         .expect(200)
         .end((err, res) => {
           if (err) done(err);
-          res.body.content.should.equal(SAMPLE_MOT.content);
+          res.body.data.attributes.content.should.equal(SAMPLE_MOT.content);
           done();
         });
     });

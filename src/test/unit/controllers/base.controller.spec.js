@@ -1,5 +1,6 @@
 /*  global
 MODELS
+CONFIG
 EventEmitter
 httpMocks:true*/
 import BaseController from 'controllers/base.controller';
@@ -15,6 +16,38 @@ const MOCK_MOTS = [
     content: 'Another update',
   },
 ];
+
+/**
+ * API data definition.
+ * This is how the data received from the APi would look like.
+ *
+ * @example
+ * {
+   data: [{
+     type: 'mots',
+     id: 1,
+     attributes: {
+       content: 'A simple update',
+     },
+     links: {
+       self: `${CONFIG.host}/api/v1/mots/1`,
+     },
+     relationships: {},
+   }, {
+     type: 'mots',
+     id: 2,
+     attributes: {
+       content: 'Another update',
+     },
+     links: {
+       self: `${CONFIG.host}/api/v1/mots/1`,
+     },
+     relationships: {},
+   }],
+   included: [{}],
+ };
+ */
+
 let mockRes = null;
 
 describe('Base Controller', () => {
@@ -56,8 +89,8 @@ describe('Base Controller', () => {
       TEST_CONTROLLER.index(REQUEST, mockRes);
 
       mockRes.on('end', () => {
-        const data = JSON.parse(mockRes._getData());
-        data.should.have.length(2);
+        const queryData = JSON.parse(mockRes._getData());
+        queryData.data.should.have.length(2);
         mockRes.statusCode.should.equal(200);
         done();
       });
@@ -89,8 +122,8 @@ describe('Base Controller', () => {
       TEST_CONTROLLER.show(REQUEST, mockRes);
 
       mockRes.on('end', () => {
-        const data = JSON.parse(mockRes._getData());
-        data.content.should.equal('A simple update');
+        const queryData = JSON.parse(mockRes._getData());
+        queryData.data.attributes.content.should.equal('A simple update');
         mockRes.statusCode.should.equal(200);
         done();
       });
@@ -137,8 +170,8 @@ describe('Base Controller', () => {
       TEST_CONTROLLER.create(REQUEST, mockRes);
 
       mockRes.on('end', () => {
-        const data = JSON.parse(mockRes._getData());
-        data.content.should.equal('A new mot');
+        const queryData = JSON.parse(mockRes._getData());
+        queryData.data.attributes.content.should.equal('A new mot');
         mockRes.statusCode.should.equal(200);
         done();
       });
@@ -173,8 +206,8 @@ describe('Base Controller', () => {
       TEST_CONTROLLER.update(REQUEST, mockRes);
 
       mockRes.on('end', () => {
-        const data = JSON.parse(mockRes._getData());
-        data.content.should.equal('A new mot');
+        const queryData = JSON.parse(mockRes._getData());
+        queryData.data.attributes.content.should.equal('A new mot');
         mockRes.statusCode.should.equal(200);
         done();
       });
