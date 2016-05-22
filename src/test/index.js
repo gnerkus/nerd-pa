@@ -13,6 +13,7 @@ global.chaiAsPromised = chaiAsPromised;
 global.httpMocks = httpMocks;
 global.MODELS = require('models').default;
 global.CONFIG = require('config').default;
+global.LIB = require('lib').default;
 
 // The type of test being executed
 const TEST_DIR = process.env.TEST_DIR || 'all';
@@ -30,7 +31,11 @@ const TEST_LOADER = {
     // Load route tests
     require('test/integration/routes/mot.route.spec');
   },
+  lib() {
+    require('test/lib/formatResponse.spec')
+  },
   all() {
+    this.lib();
     this.unit();
     this.integration();
   },
