@@ -13,7 +13,8 @@
     "codacy": "./node_modules/.bin/babel gulpfile.src.js -o gulpfile.js && ./node_modules/.bin/gulp codacy",
     "test": "NODE_ENV=test babel-node ./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha -- src/test/index.js",
     "test-unit": "NODE_ENV=test TEST_DIR=unit mocha --compilers js:babel-core/register src/test/index.js",
-    "test-integration": "NODE_ENV=test TEST_DIR=integration mocha --compilers js:babel-core/register src/test/index.js"
+    "test-integration": "NODE_ENV=test TEST_DIR=integration mocha --compilers js:babel-core/register src/test/index.js",
+    "test-lib": "NODE_ENV=test TEST_DIR=lib mocha --compilers js:babel-core/register src/test/index.js"
   },
   "engines": {
     "node": "5.7.1"
