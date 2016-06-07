@@ -10,13 +10,14 @@ const APP = express();
 const CORS_OPTIONS = {
   origin: config.host || '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept'
 };
 
 // App-wide variables
 APP.set('port', config.port || 1337);
 
 // Application middleware
-APP.use(bodyParser.json());
+APP.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 APP.use(bodyParser.urlencoded({
   extended: true,
 }));
