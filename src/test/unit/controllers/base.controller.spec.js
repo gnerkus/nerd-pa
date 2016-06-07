@@ -167,7 +167,11 @@ describe('Base Controller', () => {
       };
 
       const REQUEST = httpMocks.createRequest({
-        body: NEW_MOT,
+        body: {
+          data: {
+            attributes: NEW_MOT,
+          }
+        },
       });
       TEST_CONTROLLER.create(REQUEST, mockRes);
 
@@ -184,7 +188,11 @@ describe('Base Controller', () => {
       const NEW_MOT = {};
 
       const REQUEST = httpMocks.createRequest({
-        body: NEW_MOT,
+        body: {
+          data: {
+            attributes: NEW_MOT,
+          }
+        },
       });
       TEST_CONTROLLER.create(REQUEST, mockRes);
 
