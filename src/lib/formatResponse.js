@@ -1,4 +1,12 @@
 function formatSingle(singleRes, resType, isSingle) {
+  if (!singleRes || typeof singleRes !== 'object') {
+    throw(new Error('no resource specified'));
+  }
+
+  if (!resType || typeof resType !== 'string') {
+    throw(new Error('no type specified'));
+  }
+
   const formattedRes = {
     data: {
       type: resType,
