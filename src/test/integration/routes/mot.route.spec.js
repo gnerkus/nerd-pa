@@ -80,20 +80,24 @@ describe('Mots routes', () => {
   describe('POST /mots', () => {
     it('should create a mot with valid attributes', (done) => {
       const SAMPLE_MOT = {
-        id: 4,
-        content: 'A word of advice',
+        data: {
+          attributes: {
+            id: 4,
+            content: 'A word of advice',
+          }
+        }
       };
 
       request(APP)
         .post('/api/v1/mots')
-        .set('Content-Type', 'application/json')
+        .set('Content-Type', 'application/vnd.api+json')
         .send(SAMPLE_MOT)
         .expect('Content-Type', /json/)
         .expect(200, () => {
           MODELS.Mot
-            .findOne({ where: { id: SAMPLE_MOT.id } })
+            .findOne({ where: { id: SAMPLE_MOT.data.attributes.id } })
             .then((mot) => {
-              mot.content.should.equal(SAMPLE_MOT.content);
+              mot.content.should.equal(SAMPLE_MOT.data.attributes.content);
               done();
             });
         });
@@ -101,28 +105,32 @@ describe('Mots routes', () => {
 
     it('should return 500 for invalid id', (done) => {
       const SAMPLE_MOT = {
-        id: true,
-        content: 'A word of advice',
+        data: {
+          attributes: {
+            id: true,
+            content: 'A word of advice',
+          }
+        }
       };
 
       request(APP)
         .post('/api/v1/mots')
-        .set('Content-Type', 'application/json')
+        .set('Content-Type', 'application/vnd.api+json')
         .send(SAMPLE_MOT)
         .expect('Content-Type', /json/)
         .expect(500, done);
     });
   });
 
-  describe('PUT /mots/:id', () => {
+  describe('PATCH /mots/:id', () => {
     it('should respond with json', (done) => {
       const SAMPLE_MOT = {
         content: 'A word of advice',
       };
 
       request(APP)
-        .put(`/api/v1/mots/${MOCK_MOTS[0].id}`)
-        .set('Content-Type', 'application/json')
+        .patch(`/api/v1/mots/${MOCK_MOTS[0].id}`)
+        .set('Content-Type', 'application/vnd.api+json')
         .send(SAMPLE_MOT)
         .expect('Content-Type', /json/)
         .expect(200, done);
@@ -134,8 +142,8 @@ describe('Mots routes', () => {
       };
 
       request(APP)
-        .put(`/api/v1/mots/${MOCK_MOTS[0].id}`)
-        .set('Content-Type', 'application/json')
+        .patch(`/api/v1/mots/${MOCK_MOTS[0].id}`)
+        .set('Content-Type', 'application/vnd.api+json')
         .send(SAMPLE_MOT)
         .expect(200)
         .end((err, res) => {

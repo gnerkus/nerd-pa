@@ -84,7 +84,8 @@ class BaseController {
   // Create a single instance of the specified resource
   // This is mapped to the 'POST /api/v1/resource' route
   create(request, response) {
-    const ITEM = this.MODELS[this.MODELNAME].build(request.body);
+    const MOT_ATTRS = request.body.data.attributes;
+    const ITEM = this.MODELS[this.MODELNAME].build(MOT_ATTRS);
 
     ITEM
       .save()
