@@ -12,6 +12,6 @@ export default function (router) {
   router
     .route('/mots/:id')
       .get(motController.show.bind(motController))
-      .put(motController.update.bind(motController))
+      .patch(motController.update.bind(motController))
       .delete(motController.destroy.bind(motController));
 }
