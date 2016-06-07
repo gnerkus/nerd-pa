@@ -96,7 +96,7 @@ describe('Base Controller', () => {
       });
     });
 
-    it('should return an error no model instances', (done) => {
+    it('should return an error for no model instances', (done) => {
       const REQUEST = httpMocks.createRequest();
 
       MODELS[TEST_MODEL_NAME]
@@ -123,7 +123,9 @@ describe('Base Controller', () => {
 
       mockRes.on('end', () => {
         const queryData = JSON.parse(mockRes._getData());
+        console.log('Data received: ', queryData);
         queryData.data.attributes.content.should.equal('A simple update');
+        queryData.data.type.should.equal(TEST_MODEL_NAME.toLowerCase() + 's');
         mockRes.statusCode.should.equal(200);
         done();
       });
@@ -172,6 +174,7 @@ describe('Base Controller', () => {
       mockRes.on('end', () => {
         const queryData = JSON.parse(mockRes._getData());
         queryData.data.attributes.content.should.equal('A new mot');
+        queryData.data.type.should.equal(TEST_MODEL_NAME.toLowerCase() + 's');
         mockRes.statusCode.should.equal(200);
         done();
       });

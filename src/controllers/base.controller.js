@@ -1,8 +1,6 @@
 import MODELS from 'models';
 import LIB from 'lib';
 
-console.log(LIB.formatResponse);
-
 /**
  * 2016-05-01 16:52:46
  * Base controller definition for API resources.
@@ -12,6 +10,7 @@ console.log(LIB.formatResponse);
 class BaseController {
   constructor(modelName, models = MODELS) {
     this.MODELNAME = modelName;
+    this.MODEL_TYPE = modelName.toLowerCase() + 's';
     this.MODELS = models;
   }
 
@@ -55,7 +54,7 @@ class BaseController {
 
     this.MODELS[this.MODELNAME]
       .findAll(OPTIONS)
-      .then((items) => response.status(200).json(LIB.formatResponse(items)))
+      .then((items) => response.status(200).json(LIB.formatResponse(items, this.MODEL_TYPE)))
       .catch((error) => {
         // TODO: Handle error
         response.status(500).json(error);
@@ -71,7 +70,7 @@ class BaseController {
       .findById(ID)
       .then((item) => {
         if (item) {
-          response.status(200).json(LIB.formatResponse(item));
+          response.status(200).json(LIB.formatResponse(item, this.MODEL_TYPE));
         } else {
           response.status(404).json({ message: 'not found' });
         }
@@ -89,7 +88,7 @@ class BaseController {
 
     ITEM
       .save()
-      .then((item) => response.status(200).json(LIB.formatResponse(item)))
+      .then((item) => response.status(200).json(LIB.formatResponse(item, this.MODEL_TYPE)))
       .catch((error) => {
         // TODO: Handle error
         response.status(500).json(error);
@@ -108,7 +107,7 @@ class BaseController {
         if (item) {
           item
             .update(ATTRIBUTES)
-            .then((updatedItem) => response.status(200).json(LIB.formatResponse(updatedItem)))
+            .then((updatedItem) => response.status(200).json(LIB.formatResponse(updatedItem, this.MODEL_TYPE)))
             .catch((error) => {
               // TODO: Handle error
               response.status(500).json(error);
