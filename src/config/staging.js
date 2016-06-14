@@ -7,5 +7,5 @@ export default {
     },
   },
   port: process.env.PORT,
-  host: 'https://mottr-client-staging.herokuapp.com',
+  host: 'http://mottr-client-staging.herokuapp.com',
 };
