@@ -13,18 +13,13 @@ const MODELS = require('models').default;
 const HTTP = require('http').Server(APP);
 const IO = require('socket.io')(HTTP);
 
+const MOTTR_GAME = require('game/mottr').default;
+
 IO.on('connection', (socket) => {
   console.log('A user connected.');
-  // socket.broadcast.emit('A new player has joined', socket);
-  socket.on('disconnect', () => {
-    console.log('A user disconnected.');
-  });
 
-  socket.on('new word', (word) => {
-    console.log('A user has submitted a new word.', word);
-    // Send the new word to all players.
-    IO.emit('new word', word);
-  });
+  // Set up the event listeners
+  MOTTR_GAME.initGame(IO, socket);
 });
 
 (async function () {
