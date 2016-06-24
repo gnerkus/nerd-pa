@@ -1,0 +1,9 @@
+-   repo: git://github.com/pre-commit/pre-commit-hooks
+    sha: v0.4.2
+    hooks:
+    -   id: trailing-whitespace
+-   repo: git://github.com/pre-commit/mirrors-eslint
+    sha: v2.8.0
+    hooks:
+    -   id: eslint
+        additional_dependencies: ['eslint', 'babel-eslint', 'eslint-config-airbnb', 'eslint-plugin-jsx-a11y', 'eslint-plugin-react', 'eslint-plugin-import']
