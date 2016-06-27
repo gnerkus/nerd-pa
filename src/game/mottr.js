@@ -1,3 +1,5 @@
+import levenshtein from '../lib/levenshtein';
+
 // Reference to the websocker server
 // Named with uppercase because it is assigned a value just once. 'const'
 // cannot be used here because the assignment happens later
@@ -23,16 +25,24 @@ const playerColours = [
 // TODO: This should be persisted in a database
 const GAMES = {};
 
+// A container for the previous word.
+let prevWord = '';
+
 function disconnected() {
 
 }
 
 function newWord(newWordMsg) {
+  // Compute the Levenshtein distance between the previous and new words
+  const SCORE = levenshtein(prevWord, newWordMsg.word);
+
+  // Set the new word as the new previous word.
+  prevWord = newWordMsg.word;
+
   const socketID = this.id;
   const player = GAMES[newWordMsg.gameID].players[socketID];
 
-  player.score += 1;
-  // TODO: replace this with the Levesion distance score
+  player.score += SCORE;
 
   const newWordInfo = {
     players: GAMES[newWordMsg.gameID].players,
